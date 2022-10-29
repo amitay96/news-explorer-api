@@ -78,7 +78,11 @@ const getUsers = (req, res, next) => {
 
 const getCurrentUser = (req, res, next) => {
   console.log(req.body);
-  processUserWithId(req, res, User.findById(req.body._id), next);
+  processUserWithId(req, res, User.findById(req.data.user._id), next);
 };
 
-module.exports = { createUser, login, getUsers, getCurrentUser };
+const getUserbyId = (req, res, next) => {
+  processUserWithId(req, res, User.findById(req.params.id), next);
+};
+
+module.exports = { createUser, login, getUsers, getCurrentUser, getUserbyId };
