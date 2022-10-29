@@ -1,14 +1,11 @@
 const router = require("express").Router();
-
+const { usersRouter } = require("./users");
+const { articlesRouter } = require("./articles");
 const NotFoundError = require("../utils/errors/NotFoundError");
 
-router.get("/users/me", getUser);
+router.use("/users", usersRouter);
 
-router.get("/articles", getArticles);
-
-router.post("/articles", createArticle);
-
-router.delete("/articles/:id", deleteArticle);
+router.use("/articles", articlesRouter);
 
 router.use("*", (req, res, next) => {
   next(new NotFoundError("Requested resource not found"));
