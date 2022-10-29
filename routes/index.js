@@ -1,7 +1,10 @@
 const router = require("express").Router();
 const { usersRouter } = require("./users");
 const { articlesRouter } = require("./articles");
+const auth = require('../middlewares/auth');
 const NotFoundError = require("../utils/errors/NotFoundError");
+
+router.use(auth);
 
 router.use("/users", usersRouter);
 

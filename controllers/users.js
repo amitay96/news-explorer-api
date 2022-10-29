@@ -72,7 +72,7 @@ const processUserWithId = (req, res, action, next) =>
 
 const getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(200).send({ data: users }))
+    .then((users) => res.status(200).send( users ))
     .catch(next);
 };
 
