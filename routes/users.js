@@ -3,6 +3,6 @@ const { getUsers, getCurrentUser } = require("../controllers/users");
 
 router.get("/", getUsers);
 
-router.get("/users/me", getCurrentUser);
+router.get("/me", getCurrentUser);
 
 module.exports = { usersRouter: router };
