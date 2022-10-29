@@ -1,17 +1,17 @@
-const { celebrate, Joi } = require("celebrate");
-const { ObjectId } = require("mongoose").Types;
-const validator = require("validator");
+const { celebrate, Joi } = require('celebrate');
+const { ObjectId } = require('mongoose').Types;
+const validator = require('validator');
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
   }
-  return helpers.error("string.uri");
+  return helpers.error('string.uri');
 };
 
 const validateAuth = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email().message("Valid email is required"),
+    email: Joi.string().required().email().message('Valid email is required'),
     password: Joi.string().required().min(8),
   }),
 });
@@ -44,7 +44,7 @@ const validateId = celebrate({
         if (ObjectId.isValid(value)) {
           return value;
         }
-        return helpers.message("Invalid id");
+        return helpers.message('Invalid id');
       }),
   }),
 });

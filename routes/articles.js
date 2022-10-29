@@ -1,10 +1,10 @@
-const router = require("express").Router();
-const { getArticles, createArticle, deleteArticle } = require("../controllers/articles");
+const router = require('express').Router();
+const { getArticles, createArticle, deleteArticle } = require('../controllers/articles');
 
-router.get("/", getArticles);
+router.get('/', getArticles);
 
-router.post("/", createArticle);
+router.post('/', createArticle);
 
-router.delete("/:articleId", deleteArticle);
+router.delete('/:articleId', deleteArticle);
 
 module.exports = { articlesRouter: router };

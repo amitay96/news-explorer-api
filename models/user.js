@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
@@ -23,25 +23,25 @@ const userSchema = new mongoose.Schema(
       required: [true, 'The "name" field must be filled in'],
       minlength: [2, 'The minimum length of the "name" field is 2'],
       maxlength: [30, 'The maximum length of the "name" field is 30'],
-      default: "Damien",
+      default: 'Damien',
     },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 userSchema.statics.findUserByCredentials = function findUserByCredentials(
   email,
-  password
+  password,
 ) {
   return this.findOne({ email })
-    .select("+password")
+    .select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error("Incorrect email or password"));
+        return Promise.reject(new Error('Incorrect email or password'));
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          return Promise.reject(new Error("Incorrect email or password"));
+          return Promise.reject(new Error('Incorrect email or password'));
         }
         return user;
       });
@@ -54,4 +54,4 @@ userSchema.methods.toJSON = function toJSON() {
   return rest;
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model('user', userSchema);
