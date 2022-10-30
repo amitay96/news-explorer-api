@@ -5,8 +5,8 @@ const ForbiddenError = require('../utils/errors/ForbiddenError');
 const NotFoundError = require('../utils/errors/NotFoundError');
 
 const getArticles = (req, res, next) => {
-  // const owner = req.user._id;
-  Article.find({ })
+  const owner = req.user._id;
+  Article.find({ owner })
     .then((articles) => res.status(200).send(articles))
     .catch(next);
 };
@@ -44,7 +44,9 @@ const deleteArticle = (req, res, next) => {
     })
     .then((article) => {
       if (article.owner.toString() !== req.user._id) {
-        return next(new ForbiddenError('You are not authorized to delete this article'));
+        return next(
+          new ForbiddenError('You are not authorized to delete this article'),
+        );
       }
       return Article.findByIdAndRemove(articleId).then((deletedArticle) => res
         .status(200)

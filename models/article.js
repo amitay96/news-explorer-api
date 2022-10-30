@@ -5,23 +5,23 @@ const articleSchema = new mongoose.Schema(
   {
     keyword: {
       type: String,
-      required: [true, 'The "name" field must be filled in'],
+      required: [true, 'The "keyword" field must be filled in'],
     },
     title: {
       type: String,
-      required: [true, 'The "name" field must be filled in'],
+      required: [true, 'The "title" field must be filled in'],
     },
     text: {
       type: String,
-      required: [true, 'The "name" field must be filled in'],
+      required: [true, 'The "text" field must be filled in'],
     },
     date: {
       type: String,
-      required: [true, 'The "name" field must be filled in'],
+      required: [true, 'The "date" field must be filled in'],
     },
     source: {
       type: String,
-      required: [true, 'The "name" field must be filled in'],
+      required: [true, 'The "source" field must be filled in'],
     },
     link: {
       type: String,
