@@ -7,10 +7,8 @@ const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { reqLimiter } = require('./middlewares/reqLimiter');
+const { PORT, MONGODB_URI } = require('./utils/constants');
 require('dotenv').config();
-
-const { PORT = 3000 } = process.env;
-const { MONGODB_URI = 'mongodb://localhost:27017/newsexplorer' } = process.env;
 
 mongoose.connect(MONGODB_URI);
 
