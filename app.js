@@ -4,11 +4,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
 const routes = require('./routes');
-const { login, createUser } = require('./controllers/users');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { reqLimiter } = require('./middlewares/reqLimiter');
-const { validateAuth } = require('./middlewares/validation');
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
@@ -27,9 +25,6 @@ app.options('*', cors());
 
 app.use(reqLimiter);
 app.use(requestLogger);
-
-app.post('/signin', validateAuth, login);
-app.post('/signup', validateAuth, createUser);
 
 app.use(routes);
 
