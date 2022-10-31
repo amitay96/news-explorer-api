@@ -37,18 +37,16 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  const { articleId } = req.params;
-  Article.findById(articleId)
-    .orFail(() => {
-      throw new NotFoundError('Article not found');
-    })
+  const { id } = req.params;
+  Article.findById(id)
+    .orFail(() => next(new NotFoundError('Article not found')))
     .then((article) => {
       if (article.owner.toString() !== req.user._id) {
         return next(
           new ForbiddenError('You are not authorized to delete this article'),
         );
       }
-      return Article.findByIdAndRemove(articleId).then((deletedArticle) => res
+      return Article.findByIdAndRemove(id).then((deletedArticle) => res
         .status(200)
         .send({ message: 'Article removed successfully', deletedArticle }));
     })
